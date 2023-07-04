@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Imoveis;
 use App\Exports\ImoveisExport;
 use Illuminate\Http\Request;
+use function MongoDB\BSON\toJSON;
 
 class ImoveisController extends Controller
 {
@@ -15,7 +16,8 @@ class ImoveisController extends Controller
 
     public function index(int $pagination = 20)
     {
-        return Imoveis::paginate($pagination);
+        $data = Imoveis::paginate($pagination);
+        return response($data, 200);
     }
 
     public function exportar()

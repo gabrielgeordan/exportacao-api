@@ -34,7 +34,7 @@ class ImoveisExport
             'proprietario',
         ]);
 
-    Imoveis::query()->chunk(1000, function ($imoveis) use ($writer) {
+    Imoveis::query()->take(10)->chunk(120, function ($imoveis) use ($writer) {
         foreach ($imoveis as $imovel) {
             $writer->addRow([
                 $imovel->imovel,
